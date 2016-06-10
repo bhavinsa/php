@@ -1,0 +1,54 @@
+<!DOCTYPE Html>
+<html>
+<head>
+    <link rel="stylesheet" href="media/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<!--    <script src="media/js/dataTables.bootstrap.js"></script>-->
+</head>
+    
+    <body>
+    <table id="example" class="display" cellspacing="0" width="25%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+            </tr>
+        </thead>
+    </table>
+    </body>
+<script>
+    
+/** Draw datatable */
+  var table = $('#example').DataTable({
+       language: {
+        searchPlaceholder: "Search records"
+       },
+	  "pageLength": 10,
+	  "aaSorting": [],
+	  "processing": true,
+	  "serverSide": true,
+	  "filter" : true,
+	  "ajax": {
+		  "url": 'post.php',
+		  "data": function ( d ) {
+		  },
+		  "error": function (error) {
+			  if(error.status == '401') {
+				  window.location = '';
+			  } else {
+				  alert("Something went wrong. Please try refreshing the page.");
+			  }
+		  },
+	  },
+	  "aoColumnDefs" : [ {
+          'bSortable' : false,
+          'aTargets' : []
+      } ]
+});
+  
+    
+</script>
+</html>
